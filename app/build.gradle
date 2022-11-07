@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -36,7 +37,6 @@ android {
         viewBinding = true
     }
 }
-
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -53,7 +53,47 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycle_version"
+    implementation "androidx.activity:activity-ktx:$activityKtx_version"
+
+    // Network & GSON
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.retrofit2:converter-gson:$gsonConverter_version"
+
+    // DI
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    kapt "androidx.hilt:hilt-compiler:$androidx_hilt_version"
+
+    // Network Response Adapter
+    implementation "com.github.haroldadmin:NetworkResponseAdapter:$networkAdapter_version"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Mockito
+    testImplementation "org.mockito:mockito-core:$mockitoCore_version"
+    testImplementation "org.mockito:mockito-inline:$mockitoCore_version"
+
+    // Mockito
+    testImplementation "org.mockito:mockito-core:$mockitoCore_version"
+    testImplementation "org.mockito:mockito-inline:$mockitoCore_version"
+
+    // Special Testing
+    // InstantTaskExecutorRule
+    debugImplementation "androidx.arch.core:core-testing:$coreTesting_version"
+    // TestCoroutineDispatcher
+    debugImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest_version"
+
+    // Robolectric
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
 }
+
 
 kapt {
     correctErrorTypes true
