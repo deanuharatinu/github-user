@@ -1,7 +1,8 @@
 package com.deanu.githubuser.detail
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
-  // TODO: Implement the ViewModel
-}
+@HiltViewModel
+class DetailViewModel @Inject constructor() : ViewModel()
