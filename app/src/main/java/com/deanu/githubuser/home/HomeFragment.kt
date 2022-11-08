@@ -35,7 +35,9 @@ class HomeFragment : Fragment() {
   }
 
   private fun initRecyclerView() {
-    adapter = UserAdapter {}
+    adapter = UserAdapter { userId ->
+
+    }
     binding.rvUsers.adapter = adapter
   }
 
@@ -66,6 +68,7 @@ class HomeFragment : Fragment() {
   private fun initSearchBar() {
     binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
       override fun onQueryTextSubmit(query: String?): Boolean {
+        binding.searchView.clearFocus()
         query?.let { viewModel.searchUsername(query) }
         closeKeyboard(binding.root.context, binding.root)
         return true

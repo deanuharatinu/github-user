@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
     _isLoading.value = true
     viewModelScope.launch(dispatchersProvider.io()) {
       val userState = repository.searchUser(username)
-      _isLoading.postValue(userState.userList.isEmpty() && userState.isSuccess)
+      _isLoading.postValue(false)
       _userList.postValue(userState.userList)
       if (!userState.isSuccess) {
         _errorMessage.postValue("Network Error")
