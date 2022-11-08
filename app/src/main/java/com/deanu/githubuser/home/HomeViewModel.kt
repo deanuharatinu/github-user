@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.deanu.githubuser.common.domain.model.User
 import com.deanu.githubuser.common.domain.repository.GithubUserRepository
-import com.deanu.storyapp.common.utils.DispatchersProvider
-import com.haroldadmin.cnradapter.NetworkResponse
+import com.deanu.githubuser.common.utils.coroutine.DispatchersProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,19 +29,11 @@ class HomeViewModel @Inject constructor(
   fun searchUsername(username: String) {
     _isLoading.value = true
     viewModelScope.launch(dispatchersProvider.io()) {
-      when (val response = repository.searchUser(username)) {
-        is NetworkResponse.Success -> {
-          _isLoading.postValue(false)
-          _userList.postValue(
-            response.body.items?.map {
-              User(it.id.toString(), it.username.orEmpty(), it.avatarUrl)
-            }
-          )
-        }
-        is NetworkResponse.Error -> {
-          _isLoading.postValue(false)
-          _errorMessage.postValue("Server Error")
-        }
+      val userState = repository.searchUser(username)
+      _isLoading.postValue(userState.userList.isEmpty() && userState.isSuccess)
+      _userList.postValue(userState.userList)
+      if (!userState.isSuccess) {
+        _errorMessage.postValue("Network Error")
       }
     }
   }

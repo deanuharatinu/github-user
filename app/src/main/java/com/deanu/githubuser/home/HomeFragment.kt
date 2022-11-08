@@ -53,15 +53,11 @@ class HomeFragment : Fragment() {
 
     viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
       binding.loading.visibility = if (isLoading) View.VISIBLE else View.GONE
-      binding.rvUsers.visibility = if (isLoading) View.GONE else View.VISIBLE
-      binding.emptyPlaceholder.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
     viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
       if (errorMessage.isNotEmpty()) {
         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
-        binding.rvUsers.visibility = View.GONE
-        binding.emptyPlaceholder.visibility = View.VISIBLE
         viewModel.resetError()
       }
     }
@@ -75,7 +71,7 @@ class HomeFragment : Fragment() {
         return true
       }
 
-      override fun onQueryTextChange(newText: String?): Boolean = false
+      override fun onQueryTextChange(newText: String?): Boolean = true
     })
   }
 
