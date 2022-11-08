@@ -2,8 +2,8 @@ package com.deanu.githubuser.common.di
 
 import com.deanu.githubuser.common.data.GithubUserRepoImpl
 import com.deanu.githubuser.common.domain.repository.GithubUserRepository
-import com.deanu.storyapp.common.utils.CoroutineDispatchersProvider
-import com.deanu.storyapp.common.utils.DispatchersProvider
+import com.deanu.githubuser.common.utils.coroutine.CoroutineDispatchersProvider
+import com.deanu.githubuser.common.utils.coroutine.DispatchersProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

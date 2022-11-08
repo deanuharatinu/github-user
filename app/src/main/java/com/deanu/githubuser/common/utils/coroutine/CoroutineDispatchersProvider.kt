@@ -1,4 +1,4 @@
-package com.deanu.storyapp.common.utils
+package com.deanu.githubuser.common.utils.coroutine
 
 import javax.inject.Inject
 

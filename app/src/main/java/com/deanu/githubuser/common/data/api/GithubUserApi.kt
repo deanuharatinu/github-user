@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface GithubUserApi {
   @GET(ApiConstants.SEARCH_USER)
-  suspend fun getGithubUserList(
+  suspend fun searchGithubUser(
     @Query(ApiConstants.SEARCH) username: String
   ): NetworkResponse<ApiSearchResponse, ApiSearchResponse>
 }

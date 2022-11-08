@@ -1,8 +1,7 @@
 package com.deanu.githubuser.common.domain.repository
 
-import com.deanu.githubuser.common.data.api.model.ApiSearchResponse
-import com.haroldadmin.cnradapter.NetworkResponse
+import com.deanu.githubuser.common.domain.model.UserState
 
 interface GithubUserRepository {
-  suspend fun searchUser(username: String): NetworkResponse<ApiSearchResponse, ApiSearchResponse>
+  suspend fun searchUser(username: String): UserState
 }
