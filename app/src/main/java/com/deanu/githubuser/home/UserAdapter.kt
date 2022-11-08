@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.deanu.githubuser.common.domain.model.User
 import com.deanu.githubuser.databinding.UserItemBinding
 
 class UserAdapter constructor(
-  private val clickListener: () -> Unit
+  private val clickListener: (username: String) -> Unit
 ) : ListAdapter<User, UserAdapter.ViewHolder>(DIFF_CALLBACK) {
 
   class ViewHolder(
@@ -17,11 +18,16 @@ class UserAdapter constructor(
   ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
       user: User,
-      clickListener: () -> Unit
+      clickListener: (username: String) -> Unit
     ) {
       binding.tvUsername.text = user.username
+      Glide.with(binding.root)
+        .load(user.photoUrl)
+        .circleCrop()
+        .into(binding.ivAvatar)
+
       binding.userItem.setOnClickListener {
-        clickListener
+        clickListener(user.username)
       }
     }
 

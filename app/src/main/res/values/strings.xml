@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Github User</string>
+
+    <!--  Content Description  -->
+    <string name="user_avatar_desc">User Avatar</string>
+    <string name="search_bar_desc">Search Bar</string>
+
+    <!--  Placeholder Text  -->
+    <string name="empty_placeholder">Empty</string>
+    <string name="stargazer_count_desc">Stargazer Count</string>
 </resources>

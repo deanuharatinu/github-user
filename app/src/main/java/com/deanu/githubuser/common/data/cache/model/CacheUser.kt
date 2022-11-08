@@ -19,3 +19,24 @@ data class CacheUser(
     )
   }
 }
+
+@Entity(tableName = "user_detail")
+data class CacheUserDetail(
+  @PrimaryKey
+  val id: String,
+  val fullName: String,
+  val username: String,
+  val avatarUrl: String,
+  val description: String,
+)
+
+@Entity(tableName = "user_repos")
+data class CacheUserRepos(
+  @PrimaryKey
+  val id: String,
+  val owner: String,
+  val repoName: String,
+  val repoDescription: String,
+  val updatedAt: String,
+  val stargazersCount: Int
+)

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.deanu.githubuser.common.utils.closeKeyboard
 import com.deanu.githubuser.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
@@ -35,8 +36,9 @@ class HomeFragment : Fragment() {
   }
 
   private fun initRecyclerView() {
-    adapter = UserAdapter { userId ->
-
+    adapter = UserAdapter { username ->
+      val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(username)
+      view?.findNavController()?.navigate(action)
     }
     binding.rvUsers.adapter = adapter
   }
