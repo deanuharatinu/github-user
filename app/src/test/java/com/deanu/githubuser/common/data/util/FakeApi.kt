@@ -1,6 +1,8 @@
 package com.deanu.githubuser.common.data.util
 
 import com.deanu.githubuser.common.data.api.GithubUserApi
+import com.deanu.githubuser.common.data.api.model.ApiGetDetailResponse
+import com.deanu.githubuser.common.data.api.model.ApiGetRepoResponse
 import com.deanu.githubuser.common.data.api.model.ApiSearchResponse
 import com.haroldadmin.cnradapter.NetworkResponse
 import org.mockito.Mockito
@@ -32,5 +34,13 @@ class FakeApi : GithubUserApi {
         NetworkResponse.ServerError(null, response)
       }
     }
+  }
+
+  override suspend fun getGithubHUserDetail(username: String): NetworkResponse<ApiGetDetailResponse, ApiGetDetailResponse> {
+    TODO("Not yet implemented")
+  }
+
+  override suspend fun getGithubUserRepos(username: String): NetworkResponse<List<ApiGetRepoResponse>, List<ApiGetRepoResponse>> {
+    TODO("Not yet implemented")
   }
 }

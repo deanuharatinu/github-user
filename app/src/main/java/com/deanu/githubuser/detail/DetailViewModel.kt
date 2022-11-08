@@ -42,4 +42,8 @@ class DetailViewModel @Inject constructor(
       }
     }
   }
+
+  fun resetError() {
+    _errorMessage.value = ""
+  }
 }

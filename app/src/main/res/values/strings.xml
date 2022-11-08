@@ -4,8 +4,9 @@
     <!--  Content Description  -->
     <string name="user_avatar_desc">User Avatar</string>
     <string name="search_bar_desc">Search Bar</string>
+    <string name="stargazer_count_desc">Stargazer Count</string>
 
     <!--  Placeholder Text  -->
     <string name="empty_placeholder">Empty</string>
-    <string name="stargazer_count_desc">Stargazer Count</string>
+    <string name="username_placeholder">\@%s</string>
 </resources>
