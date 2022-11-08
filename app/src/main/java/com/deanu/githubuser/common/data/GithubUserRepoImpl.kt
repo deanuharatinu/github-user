@@ -1,11 +1,13 @@
 package com.deanu.githubuser.common.data
 
 import com.deanu.githubuser.common.data.api.GithubUserApi
-import com.deanu.githubuser.common.data.api.model.ApiGetDetailResponse
-import com.deanu.githubuser.common.data.api.model.ApiGetRepoResponse.Companion.asDomain
+import com.deanu.githubuser.common.data.api.model.ApiGetDetailResponse.Companion.asCache
+import com.deanu.githubuser.common.data.api.model.ApiGetRepoResponse.Companion.asCache
 import com.deanu.githubuser.common.data.api.model.ApiItems.Companion.asCache
 import com.deanu.githubuser.common.data.cache.Cache
 import com.deanu.githubuser.common.data.cache.model.CacheUser.Companion.asDomain
+import com.deanu.githubuser.common.data.cache.model.CacheUserDetail
+import com.deanu.githubuser.common.data.cache.model.CacheUserRepos.Companion.asDomain
 import com.deanu.githubuser.common.domain.model.UserDetail
 import com.deanu.githubuser.common.domain.model.UserDetailState
 import com.deanu.githubuser.common.domain.model.UserRepo
@@ -43,22 +45,28 @@ class GithubUserRepoImpl @Inject constructor(
     return userDetailState
   }
 
-  private suspend fun getUserDescription(username: String): ApiGetDetailResponse? {
+  private suspend fun getUserDescription(username: String): CacheUserDetail? {
     return when (val response = api.getGithubHUserDetail(username)) {
-      is NetworkResponse.Success -> response.body
+      is NetworkResponse.Success -> {
+        val cacheUserDetail = response.body
+        cache.insertAndGetUserDetail(cacheUserDetail.asCache())
+      }
       is NetworkResponse.Error -> null
     }
   }
 
   private suspend fun getUserRepos(username: String): List<UserRepo>? {
     return when (val response = api.getGithubUserRepos(username)) {
-      is NetworkResponse.Success -> response.body.map { it.asDomain(username) }
+      is NetworkResponse.Success -> {
+        val cacheUserRepo = response.body.map { it.asCache(username) }
+        cache.insertAndGetUserRepos(cacheUserRepo).map { it.asDomain() }
+      }
       is NetworkResponse.Error -> null
     }
   }
 
   private suspend fun combineDetail(
-    userDescription: Deferred<ApiGetDetailResponse?>,
+    userDescription: Deferred<CacheUserDetail?>,
     userRepos: Deferred<List<UserRepo>?>
   ): UserDetailState {
     val userRepo = userRepos.await()

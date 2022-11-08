@@ -3,6 +3,7 @@ package com.deanu.githubuser.common.data.cache.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.deanu.githubuser.common.domain.model.User
+import com.deanu.githubuser.common.domain.model.UserRepo
 
 @Entity(tableName = "user")
 data class CacheUser(
@@ -39,4 +40,15 @@ data class CacheUserRepos(
   val repoDescription: String,
   val updatedAt: String,
   val stargazersCount: Int
-)
+) {
+  companion object {
+    fun CacheUserRepos.asDomain() = UserRepo(
+      id = id,
+      owner = owner,
+      repoName = repoName,
+      updatedAt = updatedAt,
+      repoDescription = repoDescription,
+      stargazersCount = stargazersCount
+    )
+  }
+}

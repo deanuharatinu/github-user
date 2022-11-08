@@ -1,6 +1,7 @@
 package com.deanu.githubuser.common.data.api.model
 
-import com.deanu.githubuser.common.domain.model.UserRepo
+import com.deanu.githubuser.common.data.cache.model.CacheUserDetail
+import com.deanu.githubuser.common.data.cache.model.CacheUserRepos
 import com.google.gson.annotations.SerializedName
 
 data class ApiGetDetailResponse(
@@ -14,7 +15,17 @@ data class ApiGetDetailResponse(
   val avatarUrl: String? = null,
   @field:SerializedName("bio")
   val description: String? = null,
-)
+) {
+  companion object {
+    fun ApiGetDetailResponse.asCache() = CacheUserDetail(
+      id = id.toString(),
+      fullName = fullName.orEmpty(),
+      username = username.orEmpty(),
+      avatarUrl = avatarUrl.orEmpty(),
+      description = description.orEmpty()
+    )
+  }
+}
 
 data class ApiGetRepoResponse(
   @field:SerializedName("id")
@@ -29,7 +40,7 @@ data class ApiGetRepoResponse(
   val stargazersCount: Int? = null
 ) {
   companion object {
-    fun ApiGetRepoResponse.asDomain(username: String) = UserRepo(
+    fun ApiGetRepoResponse.asCache(username: String) = CacheUserRepos(
       id = id.toString(),
       owner = username,
       repoName = repoName.orEmpty(),
