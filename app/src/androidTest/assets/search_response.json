@@ -1,0 +1,27 @@
+{
+  "total_count": 1,
+  "incomplete_results": false,
+  "items": [
+    {
+      "login": "skydoves",
+      "id": 24237865,
+      "node_id": "MDQ6VXNlcjI0MjM3ODY1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24237865?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/skydoves",
+      "html_url": "https://github.com/skydoves",
+      "followers_url": "https://api.github.com/users/skydoves/followers",
+      "following_url": "https://api.github.com/users/skydoves/following{/other_user}",
+      "gists_url": "https://api.github.com/users/skydoves/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/skydoves/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/skydoves/subscriptions",
+      "organizations_url": "https://api.github.com/users/skydoves/orgs",
+      "repos_url": "https://api.github.com/users/skydoves/repos",
+      "events_url": "https://api.github.com/users/skydoves/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/skydoves/received_events",
+      "type": "User",
+      "site_admin": false,
+      "score": 1.0
+    }
+  ]
+}
