@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
-    id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -17,7 +17,12 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.deanu.githubuser.common.data.utils.HiltTestRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -32,6 +37,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
     buildFeatures {
         viewBinding = true
@@ -48,6 +54,20 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:3.3.0"
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    implementation 'androidx.navigation:navigation-testing:2.5.3'
+
+    // Hilt Test
+    debugImplementation "androidx.fragment:fragment-testing:1.5.0-rc01"
+    // For instrumentation tests
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    androidTestImplementation "com.google.truth:truth:1.1.3"
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.44'
+
+    // For local unit tests
+    testImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptTest 'com.google.dagger:hilt-compiler:2.44'
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -64,9 +84,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$gsonConverter_version"
 
     // DI
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    kapt "androidx.hilt:hilt-compiler:$androidx_hilt_version"
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+//    kapt "androidx.hilt:hilt-compiler:$androidx_hilt_version"
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
