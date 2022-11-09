@@ -39,7 +39,6 @@ import javax.inject.Singleton
 class HomeFragmentTest {
   @Inject
   lateinit var okHttpClient: OkHttpClient
-
   private val fakeServer = FakeServer()
 
   @get:Rule
@@ -110,6 +109,7 @@ class HomeFragmentTest {
     launchFragmentInHiltContainer<HomeFragment> { }
     onView(withId(androidx.appcompat.R.id.search_src_text))
       .perform(typeText(expectedUsername), pressImeActionButton())
+    onView(isRoot()).perform(waitFor(500))
 
     // Then
     onView(withId(R.id.rv_users))

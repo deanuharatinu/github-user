@@ -2,12 +2,13 @@
 buildscript {
     ext.nav_version = "2.5.2"
     ext.kotlin_version = "1.7.20"
-    ext.gradle_version = "7.1.3"
+    ext.gradle_version = "7.2.1"
+    ext.gradle_plugin_version = "2.44"
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.44"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$gradle_plugin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
     repositories {
@@ -24,23 +25,19 @@ ext {
     compileSdkVersion = 32
 
     // Version
-    room_version = "2.4.2"
     archLifecycle_version = "2.5.1"
     okhttp_version = "5.0.0-alpha.9"
     gsonConverter_version = "2.9.0"
-    hilt_version = '2.42'
-    androidx_hilt_version = '1.0.0-alpha03'
+    hilt_version = '2.44'
     networkAdapter_version = "5.0.0"
-    dataStore_version = "1.0.0"
     glide_version = "4.13.2"
-    maps_version = "18.1.0"
-    location_version = "20.0.0"
-    robolectric_version = "4.8"
     mockitoCore_version = "4.8.0"
     mockitoInline_version = "4.8.0"
     activityKtx_version = "1.5.1"
     coreTesting_version = "2.1.0"
     coroutinesTest_version = "1.6.1"
     room_version = "2.4.2"
-    pagingRuntime_version = "3.1.1"
+    truth_version = "1.1.3"
+    espresso_version = "3.4.0"
+    robolectric_version = '4.8'
 }

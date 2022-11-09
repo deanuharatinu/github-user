@@ -1,11 +1,14 @@
 package com.deanu.githubuser.home
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.deanu.githubuser.R
 import com.deanu.githubuser.common.domain.model.User
 import com.deanu.githubuser.databinding.UserItemBinding
 
@@ -24,6 +27,7 @@ class UserAdapter constructor(
       Glide.with(binding.root)
         .load(user.photoUrl)
         .circleCrop()
+        .placeholder(ColorDrawable(getColor(binding.root.context, R.color.neutral_50)))
         .into(binding.ivAvatar)
 
       binding.userItem.setOnClickListener {
