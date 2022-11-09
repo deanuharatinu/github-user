@@ -46,7 +46,7 @@ class GithubUserRepoImpl @Inject constructor(
   }
 
   private suspend fun getUserDescription(username: String): CacheUserDetail? {
-    return when (val response = api.getGithubHUserDetail(username)) {
+    return when (val response = api.getGithubUserDetail(username)) {
       is NetworkResponse.Success -> {
         val cacheUserDetail = response.body
         cache.insertAndGetUserDetail(cacheUserDetail.asCache())

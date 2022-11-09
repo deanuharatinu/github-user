@@ -36,11 +36,27 @@ class FakeApi : GithubUserApi {
     }
   }
 
-  override suspend fun getGithubHUserDetail(username: String): NetworkResponse<ApiGetDetailResponse, ApiGetDetailResponse> {
-    TODO("Not yet implemented")
+  override suspend fun getGithubUserDetail(username: String):
+      NetworkResponse<ApiGetDetailResponse, ApiGetDetailResponse> {
+    return if (username == "success" || username == "user_repos_failed") {
+      val apiGetUserDesc = DummyData.getDummyUserDescription()
+      val response = Mockito.mock(Response::class.java)
+      NetworkResponse.Success(apiGetUserDesc, response)
+    } else {
+      val response = Mockito.mock(Response::class.java)
+      NetworkResponse.ServerError(null, response)
+    }
   }
 
-  override suspend fun getGithubUserRepos(username: String): NetworkResponse<List<ApiGetRepoResponse>, List<ApiGetRepoResponse>> {
-    TODO("Not yet implemented")
+  override suspend fun getGithubUserRepos(username: String):
+      NetworkResponse<List<ApiGetRepoResponse>, List<ApiGetRepoResponse>> {
+    return if (username == "success" || username == "user_desc_failed") {
+      val apiGetGithubUserRepos = DummyData.getDummyUserRepos()
+      val response = Mockito.mock(Response::class.java)
+      NetworkResponse.Success(apiGetGithubUserRepos, response)
+    } else {
+      val response = Mockito.mock(Response::class.java)
+      NetworkResponse.ServerError(null, response)
+    }
   }
 }

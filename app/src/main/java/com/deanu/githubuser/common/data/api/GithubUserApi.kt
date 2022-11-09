@@ -15,7 +15,7 @@ interface GithubUserApi {
   ): NetworkResponse<ApiSearchResponse, ApiSearchResponse>
 
   @GET(ApiConstants.GET_USER_DETAIL + "/{username}")
-  suspend fun getGithubHUserDetail(
+  suspend fun getGithubUserDetail(
     @Path("username") username: String
   ): NetworkResponse<ApiGetDetailResponse, ApiGetDetailResponse>
 
